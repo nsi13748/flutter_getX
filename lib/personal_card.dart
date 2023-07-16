@@ -26,9 +26,27 @@ class PersonalCard extends StatelessWidget {
                 color: Color(0xff89dad0),
               ),
               child: Center(
-                child: Text(
-                  'Name',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                child: GetX<Controller>(
+                    builder: (_) => Text(
+                          'Name: ${controller.person().name}', // person() 은 Rx 타입.
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        )),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              width: double.maxFinite,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Color(0xff89dad0),
+              ),
+              child: Center(
+                child: Obx(
+                  () => Text(
+                    'age: ${controller.person().age}',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -41,24 +59,12 @@ class PersonalCard extends StatelessWidget {
                 color: Color(0xff89dad0),
               ),
               child: Center(
-                child: Text(
-                  'Name',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(20),
-              width: double.maxFinite,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color(0xff89dad0),
-              ),
-              child: Center(
-                child: Text(
-                  'Name',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                child: GetX(
+                  init: Controller(),
+                  builder: (_) => Text(
+                    'Age: ${Get.find<Controller>().person().age}',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -67,7 +73,7 @@ class PersonalCard extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          controller.updateInfo();
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.red,

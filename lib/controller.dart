@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 /// Controller에서 model객체 생성
 class Controller extends GetxController{
   final person = Person().obs;    // obs는 Rx<T> return. Person객체를 observable상태로 만듬.
+                                  // GetxController안에서 obs.객체로 만들었기 때문에 GetX와 Obx는 이것을 listen 하고잇음
 
   // person.update()와 update()는 다르다.
   void updateInfo() {
@@ -14,6 +15,5 @@ class Controller extends GetxController{
       val?.age++;     // updateInfo 메서드가 호출될때마다 나이를 1씩 증가 시키도록 함.
       val?.name = 'Coding Chef';
     });
-    update();
   }
 }
